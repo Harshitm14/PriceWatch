@@ -80,15 +80,18 @@ export function getLowestPrice(priceList: PriceHistoryItem[]) {
     }
   }
 
-  return lowestPrice.price;
+  return lowestPrice.price; // Return only the price property of the lowestPrice item
 }
 
 export function getAveragePrice(priceList: PriceHistoryItem[]) {
-  const sumOfPrices = priceList.reduce((acc, curr) => acc + curr.price, 0);
-  const averagePrice = sumOfPrices / priceList.length || 0;
+  if (priceList.length === 0) return 0; // Handle empty array case
 
-  return averagePrice;
+  const sumOfPrices = priceList.reduce((acc, curr) => acc + curr.price, 0);
+  const averagePrice = sumOfPrices / priceList.length;
+
+  return averagePrice; // Directly return the numerical average price
 }
+
 
 export const getEmailNotifType = (
   scrapedProduct: Product,
